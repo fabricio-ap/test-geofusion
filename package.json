@@ -6,19 +6,20 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prettier-format": "prettier --config .prettierrc \"src//**/*\" --write"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fabricio-ap/test-geo.git"
+    "url": "git+https://github.com/fabricio-ap/test-geofusion.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/fabricio-ap/test-geo/issues"
+    "url": "https://github.com/fabricio-ap/test-geofusion/issues"
   },
-  "homepage": "https://github.com/fabricio-ap/test-geo#readme",
+  "homepage": "https://github.com/fabricio-ap/test-geofusion#readme",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.3",
     "maplibre-gl": "^2.4.0",

@@ -3,8 +3,8 @@ import dataReducer from '../reducer';
 
 export const store = configureStore({
   reducer: {
-    data: dataReducer,
-  },
+    data: dataReducer
+  }
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

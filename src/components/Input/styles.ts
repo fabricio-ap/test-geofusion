@@ -14,7 +14,8 @@ export const Input = styled.input`
   padding: 0.75rem 1rem;
   border-radius: 0.5rem;
   border: ${({ theme }) => `0.2rem solid ${theme.border.default}`};
-  box-shadow: ${({ theme }) => `${theme.shadow.default.size} ${theme.shadow.default.color}`};
+  box-shadow: ${({ theme }) =>
+    `${theme.shadow.default.size} ${theme.shadow.default.color}`};
 
   font-size: 16px;
 

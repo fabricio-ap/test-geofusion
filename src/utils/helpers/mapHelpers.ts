@@ -1,7 +1,8 @@
 export const capitaizeString = (string: string) => {
   if (!string) return '';
 
-  if (!string.includes(' ')) return string[0].toUpperCase() + string.substring(1);
+  if (!string.includes(' '))
+    return string[0].toUpperCase() + string.substring(1);
 
   const str = string.split(' ');
   if (!str[1]) return string[0].toUpperCase() + string.substring(1);

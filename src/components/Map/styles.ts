@@ -7,7 +7,8 @@ export const MapContainer = styled.div`
 
   border: 1px solid #dddddd;
   border-radius: 0.5rem;
-  box-shadow: ${({ theme }) => `${theme.shadow.default.size} ${theme.shadow.default.color}`};
+  box-shadow: ${({ theme }) =>
+    `${theme.shadow.default.size} ${theme.shadow.default.color}`};
 `;
 
 export const MapContent = styled.div`

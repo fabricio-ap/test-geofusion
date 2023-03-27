@@ -1,7 +1,12 @@
 import { TData } from './types';
 
 export const MapServices = (map: any) => {
-  const addLayer = (id: string, features: TData, balance: number, customMarker?: any) => {
+  const addLayer = (
+    id: string,
+    features: TData,
+    balance: number,
+    customMarker?: any
+  ) => {
     customMarker.forEach((marker: any, index: number) => {
       map.loadImage(marker, (error: any, image: any) => {
         if (error) throw error;
@@ -19,17 +24,17 @@ export const MapServices = (map: any) => {
           type: 'Feature',
           geometry: {
             type: 'Point',
-            coordinates: [longitude, latitude],
+            coordinates: [longitude, latitude]
           },
           properties: {
             ...props,
-            icon: props.revenue >= balance ? `${id}_${0}` : `${id}_${1}`,
-          },
-        })),
+            icon: props.revenue >= balance ? `${id}_${0}` : `${id}_${1}`
+          }
+        }))
       },
       cluster: true,
       clusterMaxZoom: 14, // Max zoom to cluster points on
-      clusterRadius: 50,
+      clusterRadius: 50
     });
 
     map.addLayer({
@@ -38,10 +43,9 @@ export const MapServices = (map: any) => {
       source: id,
       filter: ['has', 'point_count'],
       paint: {
-        'circle-color': ['step', ['get', 'point_count'], '#51bbd6', 100, '#f1f075', 750, '#f28cb1'],
-        'circle-radius': ['step', ['get', 'point_count'], 20, 100, 30, 750, 40],
-        'icon-allow-overlap': true,
-      },
+        'circle-color': '#50E059',
+        'circle-radius': ['step', ['get', 'point_count'], 20, 100, 30, 750, 40]
+      }
     });
 
     map.addLayer({
@@ -52,8 +56,8 @@ export const MapServices = (map: any) => {
       layout: {
         'text-field': ['get', 'point_count_abbreviated'],
         'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
-        'text-size': 12,
-      },
+        'text-size': 12
+      }
     });
 
     // Add a symbol layer
@@ -64,27 +68,17 @@ export const MapServices = (map: any) => {
       filter: ['!', ['has', 'point_count']],
       layout: {
         'icon-image': ['get', 'icon'],
-        'icon-allow-overlap': true,
-        'icon-ignore-placement': true,
         'text-allow-overlap': true,
         'text-field': ['get', 'name'],
         'text-font': ['Lato'],
         'text-offset': [0, 1.25],
-        'text-anchor': 'top',
-      },
-      // paint: {
-      //   'circle-color': id === 'layer_1' ? theme.background.primary : theme.text.custom,
-      //   'circle-radius': 4,
-      //   'circle-stroke-width': 1,
-      //   'circle-stroke-color': id === 'layer_1' ? theme.background.primary : theme.text.custom,
-      // },
+        'text-anchor': 'top'
+      }
     });
   };
 
   const removeLayer = (id: string, markers: any[]) => {
     const layer = map.getLayer(id);
-    const clusters = map.getLayer(`${id}_clusters`);
-    const clusterCount = map.getLayer(`${id}_cluster-count`);
     const source = map.getSource(id);
 
     if (layer) {
@@ -98,17 +92,9 @@ export const MapServices = (map: any) => {
     if (source) map.removeSource(id);
   };
 
-  const filterLayerByString = (id: string, filter: string, value: string) => {
-    const layer = map.getLayer(id);
-
-    if (layer) {
-      map.setFilter(id, ['in', filter, ['get', value]]);
-    }
-  };
-
   const getLayer = (id: string) => {
     return map.getLayer(id);
   };
 
-  return { addLayer, removeLayer, filterLayerByString, getLayer };
+  return { addLayer, removeLayer, getLayer };
 };

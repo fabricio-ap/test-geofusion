@@ -10,7 +10,8 @@ export const TableContainer = styled.div`
 
 export const TableContent = styled.table`
   width: 100%;
-  box-shadow: ${({ theme }) => `${theme.shadow.default.size} ${theme.shadow.default.color}`};
+  box-shadow: ${({ theme }) =>
+    `${theme.shadow.default.size} ${theme.shadow.default.color}`};
 `;
 
 export const TableHeaderCell = styled.th`
@@ -28,7 +29,8 @@ export const TableBodyCell = styled.td<TTableBodyCell>`
   border: 1px solid #dddddd;
   text-align: left;
   padding: 0.75rem;
-  color: ${({ theme, isLimit }) => (!isLimit ? theme.text.default : theme.text.custom)};
+  color: ${({ theme, isLimit }) =>
+    !isLimit ? theme.text.default : theme.text.custom};
   background-color: ${({ theme }) => theme.background.secondary};
 `;
 
@@ -50,7 +52,8 @@ export const PageButton = styled.button<TPageButton>`
 
   background-color: ${({ theme }) => theme.background.secondary};
   border: 1px solid #dddddd;
-  box-shadow: ${({ theme }) => `${theme.shadow.default.size} ${theme.shadow.default.color}`};
+  box-shadow: ${({ theme }) =>
+    `${theme.shadow.default.size} ${theme.shadow.default.color}`};
 
   &:first-child {
     border-top-left-radius: 0.35rem;

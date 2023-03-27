@@ -39,8 +39,8 @@ const initialState: CounterState = {
   data: sliceArray(data.stores, 10),
   filter: {
     search: '',
-    balance: 15000,
-  },
+    balance: 15000
+  }
 };
 
 export const dataSlice = createSlice({
@@ -58,10 +58,11 @@ export const dataSlice = createSlice({
     },
     changeBalance: (state, action) => {
       state.filter.balance = action.payload;
-    },
-  },
+    }
+  }
 });
 
-export const { changeSearch, changeBalance, changeData, changeMarkers } = dataSlice.actions;
+export const { changeSearch, changeBalance, changeData, changeMarkers } =
+  dataSlice.actions;
 
 export default dataSlice.reducer;
