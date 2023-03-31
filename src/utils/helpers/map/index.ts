@@ -1,4 +1,4 @@
-export const capitaizeString = (string: string) => {
+export const capitalizeString = (string: string) => {
   if (!string) return '';
 
   if (!string.includes(' '))

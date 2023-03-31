@@ -6,7 +6,7 @@ import { MapServices } from '../../services';
 import { MapContainer, MapContent } from './styles';
 import { TData, TMap } from './types';
 
-export const Map = ({ data, filter, balance }: TMap) => {
+export const Map = ({ data, balance }: TMap) => {
   const mapContainer = useRef<any>(null);
   const map = useRef<any>(null);
   const [lng] = useState(-46.65649966441811);

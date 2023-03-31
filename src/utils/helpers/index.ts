@@ -1,2 +1,2 @@
-export * from './mapHelpers';
-export * from './tableHelpers';
+export * from './map';
+export * from './table';

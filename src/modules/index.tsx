@@ -15,7 +15,7 @@ import {
   changeSearch
 } from '../reducer';
 import { RootState } from '../store';
-import { capitaizeString, sliceArray } from '../utils';
+import { capitalizeString, sliceArray } from '../utils';
 import { DataContainer, FilterContainer } from './styles';
 import { TInputChange } from './types';
 
@@ -37,7 +37,7 @@ export const AppContent = () => {
   }, [filter.search]);
 
   const onChangeSearch = ({ target }: TInputChange) =>
-    dispatch(changeSearch(capitaizeString(target.value)));
+    dispatch(changeSearch(capitalizeString(target.value)));
   const onChangeBalance = ({ target }: TInputChange) =>
     dispatch(changeBalance(target.value));
 
