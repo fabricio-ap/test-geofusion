@@ -1,6 +1,6 @@
 import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
-import { AppContent } from '../modules';
+import { AppContent } from '../modules/AppContent';
 import { store } from '../store';
 import { GlobalFonts, GlobalStyle, theme } from '../theme';
 

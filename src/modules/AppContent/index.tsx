@@ -1,19 +1,20 @@
 import { Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  Cell,
   Container,
   Header,
   Map,
   NumberInput,
   Table,
   TextInput
-} from '../components';
-import { changeBalance, changeSearch } from '../reducer';
-import { RootState } from '../store';
-import { capitalizeString } from '../utils';
+} from '../../components';
+import { changeBalance, changeSearch } from '../../reducer';
+import { RootState } from '../../store';
+import { capitalizeString } from '../../utils';
 import { filterData } from './helpers';
 import { DataContainer, FilterContainer } from './styles';
-import { TInputChange } from './types';
+import { TData, TInputChange } from './types';
 
 export const AppContent = () => {
   const {
@@ -29,6 +30,23 @@ export const AppContent = () => {
 
   const onChangeBalance = ({ target }: TInputChange) =>
     dispatch(changeBalance(target.value));
+
+  const columns = [
+    {
+      key: 'name',
+      title: 'Loja',
+      render: (item: TData) => (
+        <Cell $highlight={item.revenue <= filter.balance}>{item.name}</Cell>
+      )
+    },
+    {
+      key: 'revenue',
+      title: 'Faturamento',
+      render: (item: TData) => (
+        <Cell $highlight={item.revenue <= filter.balance}>{item.revenue}</Cell>
+      )
+    }
+  ];
 
   return (
     <Fragment>
@@ -47,7 +65,7 @@ export const AppContent = () => {
           />
         </FilterContainer>
         <DataContainer>
-          <Table data={filteredData} limit={filter.balance} />
+          <Table columns={columns} data={filteredData} />
           <Map data={markers} filter={filter.search} balance={filter.balance} />
         </DataContainer>
       </Container>

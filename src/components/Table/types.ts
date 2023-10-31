@@ -1,19 +1,12 @@
 export type TTable = {
-  data: {
-    name: string;
-    city: string;
-    state: string;
-    latitude: number;
-    longitude: number;
-    revenue: number;
-  }[][];
-  limit?: number;
+  columns: {
+    key: keyof TData;
+    title: string;
+    render: (item: any) => JSX.Element;
+  }[];
+  data: TData[][];
 };
 
-export type TTableBodyCell = {
-  isLimit: boolean;
-};
-
-export type TPageButton = {
-  selectedPage?: boolean;
+export type TData = {
+  [key: string]: string | number;
 };

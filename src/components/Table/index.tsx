@@ -1,68 +1,47 @@
 import { useEffect, useState } from 'react';
-import {
-  PageButton,
-  PageContainer,
-  TableBodyCell,
-  TableContainer,
-  TableContent,
-  TableHeaderCell
-} from './styles';
+import { Pagination } from './Pagination';
+import { TableContainer, TableContent, TableHeaderCell } from './styles';
 import { TTable } from './types';
 
-export const Table = ({ data, limit }: TTable) => {
+export const Table = ({ columns, data }: TTable) => {
   const [page, setPage] = useState(0);
-  const pages = data.map((_, index) => index);
 
   useEffect(() => {
     setPage(0);
   }, [data]);
 
-  const previousPage = () => data[page - 1] && setPage(page - 1);
-  const nextPage = () => data[page + 1] && setPage(page + 1);
-  const changePage = (value: number) => setPage(value);
-
-  const showData = Boolean(data.length);
+  const handlePreviousPage = () => data[page - 1] && setPage(page - 1);
+  const handleNextPage = () => data[page + 1] && setPage(page + 1);
+  const handleChangePage = (value: number) => setPage(value);
 
   return (
     <TableContainer>
       <TableContent>
         <thead>
           <tr>
-            <TableHeaderCell>Loja</TableHeaderCell>
-            <TableHeaderCell>Faturamento</TableHeaderCell>
+            {columns.map(({ key, title }) => (
+              <TableHeaderCell key={key}>{title}</TableHeaderCell>
+            ))}
           </tr>
         </thead>
         <tbody>
-          {showData ? (
-            data[page].map(({ name, revenue }) => (
-              <tr key={name}>
-                <TableBodyCell isLimit={revenue < (limit || 0)}>
-                  {name}
-                </TableBodyCell>
-                <TableBodyCell isLimit={revenue < (limit || 0)}>
-                  {revenue}
-                </TableBodyCell>
-              </tr>
-            ))
-          ) : (
-            <></>
-          )}
+          {data[page].map((item, index) => (
+            <tr key={index}>
+              {columns.map(({ key, render }) =>
+                render ? render(item) : <td key={key}>item[key]</td>
+              )}
+            </tr>
+          ))}
         </tbody>
       </TableContent>
-      <PageContainer>
-        <PageButton onClick={previousPage}>{`<`}</PageButton>
-        {pages &&
-          pages.map((item) => (
-            <PageButton
-              key={item}
-              selectedPage={item === page}
-              onClick={() => changePage(item)}
-            >
-              {item + 1}
-            </PageButton>
-          ))}
-        <PageButton onClick={nextPage}>{`>`}</PageButton>
-      </PageContainer>
+
+      <Pagination
+        page={page}
+        total={data.length}
+        onPreviousPage={handlePreviousPage}
+        onNextPage={handleNextPage}
+        onSelectPage={handleChangePage}
+      />
     </TableContainer>
   );
 };
