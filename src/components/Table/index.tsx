@@ -11,7 +11,7 @@ import { TTable } from './types';
 
 export const Table = ({ data, limit }: TTable) => {
   const [page, setPage] = useState(0);
-  const pages = data.map((value, index) => index);
+  const pages = data.map((_, index) => index);
 
   useEffect(() => {
     setPage(0);

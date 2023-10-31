@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from 'react';
+import { Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   Container,
@@ -8,36 +8,25 @@ import {
   Table,
   TextInput
 } from '../components';
-import {
-  changeBalance,
-  changeData,
-  changeMarkers,
-  changeSearch
-} from '../reducer';
+import { changeBalance, changeSearch } from '../reducer';
 import { RootState } from '../store';
-import { capitalizeString, sliceArray } from '../utils';
+import { capitalizeString } from '../utils';
+import { filterData } from './helpers';
 import { DataContainer, FilterContainer } from './styles';
 import { TInputChange } from './types';
 
 export const AppContent = () => {
   const {
-    data: { defaultData, markers, data, filter }
+    data: { data, filter }
   } = useSelector((state: RootState) => state);
+
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const newData = filter.search
-      ? defaultData.filter(({ name }) =>
-          name.toLowerCase().includes(filter.search.toLowerCase())
-        )
-      : defaultData;
-
-    dispatch(changeData(sliceArray(newData, 10)));
-    dispatch(changeMarkers(newData));
-  }, [filter.search]);
+  const { filteredData, markers } = filterData(data, filter.search);
 
   const onChangeSearch = ({ target }: TInputChange) =>
     dispatch(changeSearch(capitalizeString(target.value)));
+
   const onChangeBalance = ({ target }: TInputChange) =>
     dispatch(changeBalance(target.value));
 
@@ -58,7 +47,7 @@ export const AppContent = () => {
           />
         </FilterContainer>
         <DataContainer>
-          <Table data={data} limit={filter.balance} />
+          <Table data={filteredData} limit={filter.balance} />
           <Map data={markers} filter={filter.search} balance={filter.balance} />
         </DataContainer>
       </Container>

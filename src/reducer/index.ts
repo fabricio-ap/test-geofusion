@@ -1,24 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import data from '../assets/data/data.json';
-import { sliceArray } from '../utils';
 
 export interface CounterState {
-  defaultData: {
-    name: string;
-    city: string;
-    state: string;
-    latitude: number;
-    longitude: number;
-    revenue: number;
-  }[];
-  markers: {
-    name: string;
-    city: string;
-    state: string;
-    latitude: number;
-    longitude: number;
-    revenue: number;
-  }[];
   data: {
     name: string;
     city: string;
@@ -26,7 +9,7 @@ export interface CounterState {
     latitude: number;
     longitude: number;
     revenue: number;
-  }[][];
+  }[];
   filter: {
     search: string;
     balance: number;
@@ -34,9 +17,7 @@ export interface CounterState {
 }
 
 const initialState: CounterState = {
-  defaultData: data.stores,
-  markers: data.stores,
-  data: sliceArray(data.stores, 10),
+  data: data.stores,
   filter: {
     search: '',
     balance: 15000
@@ -50,9 +31,6 @@ export const dataSlice = createSlice({
     changeData: (state, action) => {
       state.data = action.payload;
     },
-    changeMarkers: (state, action) => {
-      state.markers = action.payload;
-    },
     changeSearch: (state, action) => {
       state.filter.search = action.payload;
     },
@@ -62,7 +40,6 @@ export const dataSlice = createSlice({
   }
 });
 
-export const { changeSearch, changeBalance, changeData, changeMarkers } =
-  dataSlice.actions;
+export const { changeSearch, changeBalance, changeData } = dataSlice.actions;
 
 export default dataSlice.reducer;
