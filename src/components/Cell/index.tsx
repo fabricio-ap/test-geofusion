@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-export const Cell = styled.td<{ $highlight: boolean }>`
+interface CellProps {
+  $highlight: boolean;
+}
+
+export const Cell = styled.td<CellProps>`
   border: 1px solid #dddddd;
   text-align: left;
   padding: 0.75rem;

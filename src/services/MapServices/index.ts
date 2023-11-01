@@ -1,9 +1,9 @@
-import { TData } from './types';
+import { DataType } from './types';
 
 export const MapServices = (map: any) => {
   const addLayer = (
     id: string,
-    features: TData,
+    features: DataType,
     balance: number,
     customMarker?: any
   ) => {

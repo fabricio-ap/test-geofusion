@@ -1,14 +1,14 @@
 import { ChangeEvent } from 'react';
 
-export type TTextInput = {
+export interface TextInputProps {
   value: string;
   placeholder?: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-};
+}
 
-export type TNumberInput = {
+export interface NumberInputProps {
   value: number;
   placeholder?: string;
   label?: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-};
+}

@@ -1,8 +1,7 @@
-import React from 'react';
 import { Input, InputContainer, Label } from './styles';
-import { TNumberInput, TTextInput } from './types';
+import { NumberInputProps, TextInputProps } from './types';
 
-export const TextInput = ({ value, placeholder, onChange }: TTextInput) => {
+export const TextInput = ({ value, placeholder, onChange }: TextInputProps) => {
   return (
     <InputContainer>
       <label>&nbsp;</label>
@@ -21,7 +20,7 @@ export const NumberInput = ({
   placeholder,
   label,
   onChange
-}: TNumberInput) => {
+}: NumberInputProps) => {
   return (
     <InputContainer>
       <Label>{label}</Label>

@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { ChangeEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   Cell,
@@ -14,7 +14,7 @@ import { RootState } from '../../store';
 import { capitalizeString } from '../../utils';
 import { filterData } from './helpers';
 import { DataContainer, FilterContainer } from './styles';
-import { TData, TInputChange } from './types';
+import { DataType } from './types';
 
 export const AppContent = () => {
   const {
@@ -25,31 +25,31 @@ export const AppContent = () => {
 
   const { filteredData, markers } = filterData(data, filter.search);
 
-  const onChangeSearch = ({ target }: TInputChange) =>
+  const onChangeSearch = ({ target }: ChangeEvent<HTMLInputElement>) =>
     dispatch(changeSearch(capitalizeString(target.value)));
 
-  const onChangeBalance = ({ target }: TInputChange) =>
+  const onChangeBalance = ({ target }: ChangeEvent<HTMLInputElement>) =>
     dispatch(changeBalance(target.value));
 
   const columns = [
     {
       key: 'name',
       title: 'Loja',
-      render: (item: TData) => (
+      render: (item: DataType) => (
         <Cell $highlight={item.revenue <= filter.balance}>{item.name}</Cell>
       )
     },
     {
       key: 'revenue',
       title: 'Faturamento',
-      render: (item: TData) => (
+      render: (item: DataType) => (
         <Cell $highlight={item.revenue <= filter.balance}>{item.revenue}</Cell>
       )
     }
   ];
 
   return (
-    <Fragment>
+    <>
       <Header />
       <Container>
         <FilterContainer>
@@ -69,6 +69,6 @@ export const AppContent = () => {
           <Map data={markers} filter={filter.search} balance={filter.balance} />
         </DataContainer>
       </Container>
-    </Fragment>
+    </>
   );
 };

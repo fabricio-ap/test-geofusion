@@ -1,12 +1,12 @@
-export type TTable = {
+export interface TableProps {
   columns: {
-    key: keyof TData;
+    key: keyof DataType;
     title: string;
     render: (item: any) => JSX.Element;
   }[];
-  data: TData[][];
-};
+  data: DataType[][];
+}
 
-export type TData = {
+export type DataType = {
   [key: string]: string | number;
 };

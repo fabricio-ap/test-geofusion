@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import data from '../assets/data/data.json';
 
-export interface CounterState {
+export interface State {
   data: {
     name: string;
     city: string;
@@ -16,7 +16,7 @@ export interface CounterState {
   };
 }
 
-const initialState: CounterState = {
+const initialState: State = {
   data: data.stores,
   filter: {
     search: '',

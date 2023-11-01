@@ -1,4 +1,4 @@
-export type TData = {
+export type DataType = {
   name: string;
   city: string;
   state: string;

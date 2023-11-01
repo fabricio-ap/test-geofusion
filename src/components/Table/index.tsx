@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Pagination } from './Pagination';
 import { TableContainer, TableContent, TableHeaderCell } from './styles';
-import { TTable } from './types';
+import { TableProps } from './types';
 
-export const Table = ({ columns, data }: TTable) => {
+export const Table = ({ columns, data }: TableProps) => {
   const [page, setPage] = useState(0);
 
   useEffect(() => {
@@ -27,8 +27,12 @@ export const Table = ({ columns, data }: TTable) => {
         <tbody>
           {data[page].map((item, index) => (
             <tr key={index}>
-              {columns.map(({ key, render }) =>
-                render ? render(item) : <td key={key}>item[key]</td>
+              {columns.map(({ key, render }, index) =>
+                render ? (
+                  <Fragment key={index}>{render(item)}</Fragment>
+                ) : (
+                  <td key={key}>item[key]</td>
+                )
               )}
             </tr>
           ))}

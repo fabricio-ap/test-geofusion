@@ -1,8 +1,4 @@
-import { ChangeEvent } from 'react';
-
-export type TInputChange = ChangeEvent<HTMLInputElement>;
-
-export type TData = {
+export type DataType = {
   name: string;
   city: string;
   state: string;

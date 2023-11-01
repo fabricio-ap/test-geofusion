@@ -1,10 +1,10 @@
-export type TMap = {
-  data: TData;
+export interface MapProps {
+  data: DataType;
   filter: string;
   balance: number;
-};
+}
 
-export type TData = {
+export type DataType = {
   name: string;
   city: string;
   state: string;
